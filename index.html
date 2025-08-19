@@ -3,27 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sorry, My Love 💖</title>
+  <title>Love Journey 💖</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 
     body {
       margin: 0;
       height: 100vh;
+      font-family: 'Pacifico', cursive;
+      overflow: hidden;
       background: linear-gradient(to right, #ffafbd, #ffc3a0);
       display: flex;
       justify-content: center;
       align-items: center;
-      font-family: 'Pacifico', cursive;
-      overflow: hidden;
       position: relative;
     }
 
-    /* Falling hearts */
     .heart {
       position: absolute;
-      font-size: 2rem;
       color: #e63946;
+      font-size: 2rem;
       animation: floatUp linear infinite;
       pointer-events: none;
     }
@@ -40,9 +39,9 @@
       padding: 50px;
       text-align: center;
       box-shadow: 0 8px 30px rgba(0,0,0,0.3);
-      max-width: 450px;
-      position: relative;
+      max-width: 500px;
       z-index: 10;
+      position: relative;
       animation: popIn 1s ease forwards;
     }
 
@@ -89,29 +88,42 @@
     }
 
     .love-message {
-      display: none;
       margin-top: 20px;
       font-size: 1.3rem;
       color: #f77;
-      animation: fadeIn 2s forwards;
+      min-height: 50px;
+      font-weight: bold;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+    .typing {
+      border-right: .15em solid #f77;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    .names-animation {
+      font-size: 2.5rem;
+      color: #e63946;
+      margin-top: 30px;
+      opacity: 0;
+      animation: namesFadeIn 2s forwards;
+    }
+
+    @keyframes namesFadeIn {
+      from { opacity: 0; transform: scale(0.5);}
+      to { opacity: 1; transform: scale(1);}
     }
 
   </style>
 </head>
 <body>
 
-  <div class="card">
-    <h1>I'm Sorry 💌</h1>
-    <p>For all the times I upset you, I hope this makes you smile 😊</p>
-    <button class="btn" onclick="showLove()">Click for My Secret</button>
-    <div class="love-message" id="loveMessage">
-      I love you more than words can say! ❤️💖💘
-    </div>
+  <div class="card" id="card">
+    <h1>माझी माफी 💌</h1>
+    <p>सर्व चुकीसाठी मी माफी मागतो… पण माझं प्रेम कायम तुमच्यासोबत आहे ❤️</p>
+    <button class="btn" onclick="showLove()">Click for My Heartfelt Message</button>
+    <div class="love-message" id="loveMessage"></div>
+    <div class="names-animation" id="namesAnimation"></div>
   </div>
 
   <script>
@@ -128,10 +140,38 @@
     }
     setInterval(createHeart, 300);
 
-    // Show secret love message
+    // Marathi quotes
+    const quotes = [
+      "तू माझ्या आयुष्यातली सगळ्यात सुंदर गोष्ट आहेस ❤️",
+      "प्रेम म्हणजे फक्त शब्द नाही, माझ्यासाठी ते तुझ्यासोबत आहे 🌸",
+      "तुला हरवलो की काहीच नाही, तुला सोडू शकत नाही 😘",
+      "माझ्या आयुष्यात तूच माझं सगळं आनंद आहेस 💖",
+      "तू सोबत आहेस म्हणून प्रत्येक दिवस सुंदर आहे 🌹"
+    ];
+
     function showLove() {
-      document.getElementById('loveMessage').style.display = 'block';
+      const loveDiv = document.getElementById('loveMessage');
+      loveDiv.innerHTML = '';
+      let i = 0;
+      const quote = quotes[Math.floor(Math.random() * quotes.length)];
+      function typeChar() {
+        if (i < quote.length) {
+          loveDiv.innerHTML += quote.charAt(i);
+          i++;
+          setTimeout(typeChar, 80);
+        } else {
+          showNames();
+        }
+      }
+      loveDiv.classList.add('typing');
+      typeChar();
     }
+
+    function showNames() {
+      const namesDiv = document.getElementById('namesAnimation');
+      namesDiv.innerHTML = "❤️ Rushi 💖 & My Love ❤️";
+    }
+
   </script>
 
 </body>
