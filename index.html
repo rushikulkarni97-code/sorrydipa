@@ -71,8 +71,8 @@
 
     .btn {
       display: inline-block;
-      margin-top: 20px;
-      padding: 12px 30px;
+      margin: 10px 5px 0 5px;
+      padding: 12px 20px;
       background: #e63946;
       color: white;
       border: none;
@@ -114,65 +114,78 @@
       to { opacity: 1; transform: scale(1);}
     }
 
+    .sorry-container {
+      margin-top: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 5px;
+    }
+
+    .sorry-item {
+      background: #ffe0e0;
+      padding: 5px 10px;
+      border-radius: 10px;
+      font-size: 1rem;
+      color: #e63946;
+      animation: popIn 0.5s ease forwards;
+    }
+
   </style>
 </head>
 <body>
 
   <div class="card" id="card">
-    <h1>माझी माफी 💌</h1>
-    <p>सर्व चुकीसाठी मी माफी मागतो… पण माझं प्रेम कायम तुमच्यासोबत आहे ❤️</p>
+    <h1>I'm Sorry Bayko 💌</h1>
+	<h1>माझ्या बबडीचि कान  पकडून  माफी  मागतो... 💌</h1>
+    <p>तुझ्या  विना  सगळ व्यर्थ  आहे  पिल्लू  ❤️</p>
     <button class="btn" onclick="showLove()">Click for My Heartfelt Message</button>
     <div class="love-message" id="loveMessage"></div>
     <div class="names-animation" id="namesAnimation"></div>
+    <button class="btn" onclick="spamSorry()">पुढे काही चुकलो तर 😳</button>
+    <div class="sorry-container" id="sorryContainer"></div>
   </div>
 
-  <script>
-    // Falling hearts
-    function createHeart() {
-      const heart = document.createElement('div');
-      heart.className = 'heart';
-      heart.style.left = Math.random() * window.innerWidth + 'px';
-      heart.style.fontSize = (Math.random() * 30 + 20) + 'px';
-      heart.style.animationDuration = (Math.random() * 5 + 3) + 's';
-      heart.innerText = '❤️';
-      document.body.appendChild(heart);
-      setTimeout(() => heart.remove(), 8000);
+ <script>
+  // Falling hearts
+  function createHeart() {
+    const heart = document.createElement('div');
+    heart.className = 'heart';
+    heart.style.left = Math.random() * window.innerWidth + 'px';
+    heart.style.fontSize = (Math.random() * 30 + 20) + 'px';
+    heart.style.animationDuration = (Math.random() * 5 + 3) + 's';
+    heart.innerText = '❤️';
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 8000);
+  }
+  setInterval(createHeart, 300);
+
+  // Show names animation
+  function showNames() {
+    const namesDiv = document.getElementById('namesAnimation');
+    namesDiv.innerHTML = "❤️ Rushi 💖 & Dipa ❤️";
+  }
+
+  // Spam "Sorry 😳" 100 times
+  function spamSorry() {
+    const container = document.getElementById('sorryContainer');
+    container.innerHTML = ''; // clear previous
+    for(let i = 0; i < 100; i++) {
+      const span = document.createElement('div');
+      span.className = 'sorry-item';
+      span.innerText = "सॉरी 😳";
+      container.appendChild(span);
     }
-    setInterval(createHeart, 300);
+  }
 
-    // Marathi quotes
-    const quotes = [
-      "तू माझ्या आयुष्यातली सगळ्यात सुंदर गोष्ट आहेस ❤️",
-      "प्रेम म्हणजे फक्त शब्द नाही, माझ्यासाठी ते तुझ्यासोबत आहे 🌸",
-      "तुला हरवलो की काहीच नाही, तुला सोडू शकत नाही 😘",
-      "माझ्या आयुष्यात तूच माझं सगळं आनंद आहेस 💖",
-      "तू सोबत आहेस म्हणून प्रत्येक दिवस सुंदर आहे 🌹"
-    ];
+  // Show heartfelt message
+  function showLove() {
+    const loveMessage = document.getElementById('loveMessage');
+    loveMessage.innerHTML = "Sorry na Dipa, kar na Lushi la maff 💌<br>❤️ Rushi 💖 & Dipa ❤️";
+    showNames(); // optional if you also want names in separate animated div
+  }
+</script>
 
-    function showLove() {
-      const loveDiv = document.getElementById('loveMessage');
-      loveDiv.innerHTML = '';
-      let i = 0;
-      const quote = quotes[Math.floor(Math.random() * quotes.length)];
-      function typeChar() {
-        if (i < quote.length) {
-          loveDiv.innerHTML += quote.charAt(i);
-          i++;
-          setTimeout(typeChar, 80);
-        } else {
-          showNames();
-        }
-      }
-      loveDiv.classList.add('typing');
-      typeChar();
-    }
-
-    function showNames() {
-      const namesDiv = document.getElementById('namesAnimation');
-      namesDiv.innerHTML = "❤️ Rushi 💖 & My Love ❤️";
-    }
-
-  </script>
 
 </body>
 </html>
